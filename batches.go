@@ -26,7 +26,7 @@ type Batch struct {
 	BrewDate           *DateTime `json:"brewDate"`
 	CarbonationType    string    `json:"carboationType"`
 	BottlingDate       *DateTime `json:"bottlingDate"`
-	Notes              []string  `json:"notes"`
+	Notes              string    `json:"notes"`
 	EstimatedIBU       int       `json:"estimatedIbu"`
 	MeasuredABV        float64   `json:"measuredAbv"`
 	EstimatedBuGuRatio float64   `json:"estimatedBuGuRatio"`
