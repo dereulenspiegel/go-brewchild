@@ -81,7 +81,6 @@ func (c *Client) Batches(opts ...listOpt) ([]*Batch, error) {
 	if err != nil {
 		return nil, fmt.Errorf("Failed to read response from brewfather: %w", err)
 	}
-	fmt.Printf("\n\n%s\n\n", string(body))
 	batches := []*Batch{}
 	if err := json.Unmarshal(body, &batches); err != nil {
 		return nil, fmt.Errorf("Failed to unmarshal response from brewfather: %w", err)
