@@ -23,6 +23,10 @@ func (d *DateTime) UnmarshalJSON(in []byte) error {
 	return nil
 }
 
+func (d *DateTime) Time() time.Time {
+	return d.t
+}
+
 func (d *DateTime) String() string {
 	return d.t.Format(time.RFC3339)
 }
