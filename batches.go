@@ -17,6 +17,13 @@ type Hop struct {
 	Type   string  `json:"type"`
 }
 
+type Note struct {
+	Type      string    `json:"type"`
+	Timestamp *DateTime `json:"timestamp"`
+	Status    string    `json:"Status"`
+	Note      string    `json:"note"`
+}
+
 type Batch struct {
 	ID                 string    `json:"_id"`
 	Name               string    `json:"name"`
@@ -26,7 +33,7 @@ type Batch struct {
 	BrewDate           *DateTime `json:"brewDate"`
 	CarbonationType    string    `json:"carboationType"`
 	BottlingDate       *DateTime `json:"bottlingDate"`
-	Notes              string    `json:"notes"`
+	Notes              []*Note   `json:"notes"`
 	EstimatedIBU       int       `json:"estimatedIbu"`
 	MeasuredABV        float64   `json:"measuredAbv"`
 	EstimatedBuGuRatio float64   `json:"estimatedBuGuRatio"`
@@ -73,6 +80,7 @@ func (c *Client) Batches(opts ...listOpt) ([]*Batch, error) {
 	if err != nil {
 		return nil, fmt.Errorf("Failed to read response from brewfather: %w", err)
 	}
+	fmt.Printf("\n\n%s\n\n", string(body))
 	batches := []*Batch{}
 	if err := json.Unmarshal(body, &batches); err != nil {
 		return nil, fmt.Errorf("Failed to unmarshal response from brewfather: %w", err)
