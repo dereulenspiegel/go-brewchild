@@ -112,7 +112,7 @@ type Batch struct {
 	Author       string         `json:"author"`
 	BatchNotes   string         `json:"batchNotes"`
 	Recipe       *Recipe        `json:"recipe"`
-	Fermentables []*Fermentable `json:"batchFermentable"`
+	Fermentables []*Fermentable `json:"batchFermentables"`
 	Yeasts       []*Yeast       `json:"batchYeasts"`
 	BatchMiscs   []*Miscs       `json:"batchMiscsLocal"`
 }
