@@ -60,6 +60,7 @@ type Yeast struct {
 	Form           string  `json:"form"`
 	Laboratory     string  `json:"laboratory"`
 	ID             string  `json:"_id"`
+	ProductID      string  `json:"productId"`
 }
 
 type Fermentable struct {
