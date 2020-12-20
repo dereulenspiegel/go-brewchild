@@ -93,7 +93,7 @@ func (b *brewfatherTransport) RoundTrip(r *http.Request) (*http.Response, error)
 		if err != nil {
 			return nil, fmt.Errorf("Failed to read error response: %w", err)
 		}
-		return nil, fmt.Errorf("Received error from brewfather: %s", string(body))
+		return nil, fmt.Errorf("Received error from brewfather (%d): %s", resp.StatusCode, string(body))
 	}
 	return resp, err
 }
