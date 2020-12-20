@@ -118,6 +118,35 @@ type Batch struct {
 	BatchMiscs   []*Miscs       `json:"batchMiscsLocal"`
 }
 
+func (c *Client) Batch(id string, opts ...listOpt) (batch *Batch, err error) {
+	url, err := url.Parse(c.apiBase + "batches/" + id)
+	if err != nil {
+		return nil, fmt.Errorf("Failed to parse brewfather URL: %w", err)
+	}
+	for _, o := range opts {
+		url = o(url)
+	}
+	req, err := http.NewRequest(http.MethodGet, url.String(), nil)
+	if err != nil {
+		return nil, fmt.Errorf("Failed to create request to brewfather: %w", err)
+	}
+
+	resp, err := c.h.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("Failed to query the brewfather server: %w", err)
+	}
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return nil, fmt.Errorf("Failed to read response from brewfather: %w", err)
+	}
+	batch = &Batch{}
+	if err := json.Unmarshal(body, &batch); err != nil {
+		return nil, fmt.Errorf("Failed to unmarshal response from brewfather: %w", err)
+	}
+	return batch, nil
+}
+
 func (c *Client) Batches(opts ...listOpt) ([]*Batch, error) {
 	url, err := url.Parse(c.apiBase + "batches")
 	if err != nil {
