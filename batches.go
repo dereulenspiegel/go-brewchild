@@ -118,6 +118,44 @@ type Batch struct {
 	BatchMiscs   []*Miscs       `json:"batchMiscsLocal"`
 }
 
+func (b *Batch) GetABV() float64 {
+	if b.MeasuredABV != 0.0 {
+		return b.MeasuredABV
+	}
+	return b.ABV
+}
+
+func (b *Batch) GetOG() float64 {
+	if b.OG != 0.0 {
+		return b.OG
+	}
+	return b.EstimatedOG
+}
+
+func (b *Batch) GetFG() float64 {
+	if b.MeasuredFG != 0.0 {
+		return b.MeasuredFG
+	}
+	if b.EstimatedFG != 0.0 {
+		return b.EstimatedFG
+	}
+	return b.FG
+}
+
+func (b *Batch) GetIBU() int {
+	if b.IBU != 0 {
+		return b.IBU
+	}
+	return b.EstimatedIBU
+}
+
+func (b *Batch) GetBuGuRatio() float64 {
+	if b.BuGuRatio != 0.0 {
+		return b.BuGuRatio
+	}
+	return b.EstimatedBuGuRatio
+}
+
 func (c *Client) Batch(id string, opts ...listOpt) (batch *Batch, err error) {
 	url, err := url.Parse(c.apiBase + "batches/" + id)
 	if err != nil {
