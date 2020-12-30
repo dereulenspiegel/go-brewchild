@@ -36,6 +36,29 @@ type Note struct {
 	Note      string    `json:"note"`
 }
 
+type Style struct {
+	RbrMax         float64 `json:"rbrMax"`
+	ColorMax       int     `json:"colorMax"`
+	FgMin          float64 `json:"fgMin"`
+	CategoryNumber string  `json:"categoryNumber"`
+	Category       string  `json:"category"`
+	StyleGuide     string  `json:"styleGuide"`
+	BuGuMax        float64 `json:"buGuMax"`
+	Type           string  `json:"type"`
+	AbvMax         float64 `json:"abvMax"`
+	OgMax          float64 `json:"ogMax"`
+	FgMax          float64 `json:"fgMax"`
+	IBUMax         float64 `json:"ibuMax"`
+	OgMin          float64 `json:"ogMin"`
+	RbrMin         float64 `json:"rbrMin"`
+	Name           string  `json:"name"`
+	BuGuMin        float64 `json:"buGuMin"`
+	ColorMin       int     `json:"colorMin"`
+	IBUMin         float64 `json:"ibuMin"`
+	ID             string  `json:"_id"`
+	AbvMin         float64 `json:"abvMin"`
+}
+
 type Recipe struct {
 	Data struct {
 		MashFermentables []*Fermentable `json:"mashFermentables"`
@@ -46,6 +69,7 @@ type Recipe struct {
 	SumDryHopPerLiter float64        `json:"sumDryHopPerLiter"`
 	Author            string         `json:"author"`
 	Hops              []*Hop         `json:"hops"`
+	Style             *Style         `json:"style"`
 }
 
 type Yeast struct {
